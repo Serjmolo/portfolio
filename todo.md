@@ -120,6 +120,7 @@ Design uses two typeface families — both are commercial:
 
 ## 6. Responsive / Polish
 
+- [ ] 100% fullscreen, fluid width grid — layout stretches edge-to-edge at any viewport width, no max-width cap
 - [ ] Desktop baseline: 1440px wide, `30px` horizontal padding
 - [ ] Tablet breakpoint (~768px): stack 2-col grid to 1-col
 - [ ] Mobile breakpoint (~375px): reduce hero font size, adjust nav (hamburger menu?)
