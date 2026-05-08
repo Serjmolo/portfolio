@@ -43,9 +43,9 @@
       c.width   = c.height = 64;
       const ctx = c.getContext('2d');
       const g   = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-      g.addColorStop(0,    'rgba(200,200,200,1)');
-      g.addColorStop(0.38, 'rgba(200,200,200,0.85)');
-      g.addColorStop(1,    'rgba(200,200,200,0)');
+      g.addColorStop(0,    'rgba(255,255,255,1)');
+      g.addColorStop(0.38, 'rgba(255,255,255,0.85)');
+      g.addColorStop(1,    'rgb(228, 228, 228)');
       ctx.fillStyle = g;
       ctx.fillRect(0, 0, 64, 64);
       return new THREE.CanvasTexture(c);
@@ -110,16 +110,11 @@
     const GG = 221 / 255; // 0.867
     const GB = 0;
 
-    // #F4F3ED normalised — warm off-white base for all eye particles
-    const CR = 244 / 255; // 0.957
-    const CG = 243 / 255; // 0.953
-    const CB = 237 / 255; // 0.929
-
     function fill() {
       const d = dims();
       let i = 0;
 
-      // Iris — warm off-white, slight center-bright gradient
+      // Iris — rich purple, gradient light-center → dark-edge
       for (let k = 0; k < NI; k++, i++) {
         const [x, y] = randCircle(d.ir);
         const r      = Math.sqrt(x * x + y * y);
@@ -129,15 +124,15 @@
         hy[i]   = y;
         zone[i] = 0;
         const t  = r / d.ir;
-        origCol[i*3]   = clamp(CR - t*0.06 + rand(0.018));
-        origCol[i*3+1] = clamp(CG - t*0.06 + rand(0.018));
-        origCol[i*3+2] = clamp(CB - t*0.06 + rand(0.018));
+        origCol[i*3]   = clamp(0.486*(1-t) + 0.200*t + rand(0.055));
+        origCol[i*3+1] = clamp(0.322*(1-t) + 0.094*t + rand(0.030));
+        origCol[i*3+2] = clamp(0.980*(1-t) + 0.784*t + rand(0.060));
         pos[i*3]   = x + spread(FW * 0.9);
         pos[i*3+1] = y + spread(FH * 0.9);
         pos[i*3+2] = 0.1;
       }
 
-      // Pupil — slightly dimmer warm off-white
+      // Pupil — near-black
       for (let k = 0; k < NP; k++, i++) {
         const [x, y] = randCircle(d.pr);
         polR[i] = Math.sqrt(x * x + y * y);
@@ -145,39 +140,37 @@
         hx[i]   = x;
         hy[i]   = y;
         zone[i] = 1;
-        const dim = 0.88 + Math.random() * 0.04;
-        origCol[i*3]   = CR * dim;
-        origCol[i*3+1] = CG * dim;
-        origCol[i*3+2] = CB * dim;
+        const v  = 0.018 + Math.random() * 0.028;
+        origCol[i*3] = origCol[i*3+1] = origCol[i*3+2] = v;
         pos[i*3]   = x + spread(FW * 0.5);
         pos[i*3+1] = y + spread(FH * 0.5);
         pos[i*3+2] = 0.2;
       }
 
-      // Sclera — warm off-white
+      // Sclera — mid-gray, clearly visible on white background
       for (let k = 0; k < NS; k++, i++) {
         const [x, y] = randSclera(d.ew, d.eh, d.ir * 1.03);
         hx[i]   = x;
         hy[i]   = y;
         zone[i] = 2;
-        origCol[i*3]   = clamp(CR + rand(0.015));
-        origCol[i*3+1] = clamp(CG + rand(0.015));
-        origCol[i*3+2] = clamp(CB + rand(0.015));
+        const v  = 0.62 + Math.random() * 0.10;
+        origCol[i*3]   = v - 0.02;
+        origCol[i*3+1] = v - 0.03;
+        origCol[i*3+2] = v + 0.06; // faint blue tint
         pos[i*3]   = x + spread(FW * 0.3);
         pos[i*3+1] = y + spread(FH * 0.3);
         pos[i*3+2] = 0;
       }
 
-      // Eyelid — warm off-white
+      // Eyelid — dark charcoal
       for (let k = 0; k < NE; k++, i++) {
         const upper  = k < NE / 2;
         const [x, y] = elidPt(Math.random(), d.ew, d.eh, upper);
         hx[i]   = x;
         hy[i]   = y;
         zone[i] = 3;
-        origCol[i*3]   = CR;
-        origCol[i*3+1] = CG;
-        origCol[i*3+2] = CB;
+        const v  = 0.06 + Math.random() * 0.07;
+        origCol[i*3] = origCol[i*3+1] = origCol[i*3+2] = v;
         pos[i*3]   = x;
         pos[i*3+1] = y + (upper ? 1 : -1) * FH * (0.1 + Math.random() * 0.25);
         pos[i*3+2] = 0.5;
@@ -218,7 +211,6 @@
     let irisRot   = 0;
     let dilation  = 1;
     let targetDil = 1;
-    let time      = 0;
 
     // ── Events ───────────────────────────────────────────────────────────
     hero.addEventListener('mousemove', (e) => {
@@ -261,8 +253,6 @@
 
       irisRot  += hovered ? 0.009 : 0.0022;
       dilation += (targetDil - dilation) * 0.055;
-      time     += 0.025;
-      const pulse = 1 + 0.035 * Math.sin(time * 1.1);
 
       const mX = mouse.x;
       const mY = mouse.y;
@@ -281,12 +271,9 @@
           const r = polR[i] * dilation;
           thx = r * Math.cos(a);
           thy = r * Math.sin(a);
-        } else if (z === 2) {
+        } else {
           thx = hx[i];
           thy = hy[i];
-        } else {
-          thx = hx[i] * pulse;
-          thy = hy[i] * pulse;
         }
 
         // Spring
