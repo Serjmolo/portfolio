@@ -1,0 +1,1 @@
+- [Portfolio site project](project_portfolio.md) — Static HTML/CSS/JS portfolio for Sergey Golosov (DSGN WARRIOR), design tokens, typography scale, spacing, About section confirmed specs
