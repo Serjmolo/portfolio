@@ -1,0 +1,1 @@
+- [Portfolio site — Three.js setup and eye animation](project_portfolio.md) — Three.js vendored locally (v0.160.0 UMD); WebGLRenderer must be try/catched in eye.js
