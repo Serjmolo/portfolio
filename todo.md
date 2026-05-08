@@ -1,4 +1,4 @@
-# Portfolio Site — Build & Deploy Checklist
+# DSGN Warrior Site — Build & Deploy Checklist
 
 Design reference: https://www.figma.com/design/c7yXpJlc6ESTuWA5unXTvg/RGS-ID-ideas?node-id=324-45
 Deploy target: GitHub Pages (`username.github.io` or `username.github.io/repo-name`)
@@ -66,6 +66,7 @@ Design uses two typeface families — both are commercial:
 
 ### Hero
 - [ ] Large headline: `THE PAST DESIGNS` (TT Ramillas Regular) + `THE FUTURE` (TT Ramillas Italic)
+- [ ] Large headline: `THE PAST DESIGNS` (TT Ramillas Regular) + `THE FUTURE` (TT Ramillas Italic)
 - [ ] 110px font, −5.5px letter-spacing, uppercase, centered
 - [ ] Sub-row: `THINK → ANALYZE → DESIGN` with arrow SVG separators
 - [ ] Generous top/bottom padding (~180px)
@@ -76,10 +77,10 @@ Design uses two typeface families — both are commercial:
 - [ ] 8 case cards total (4 rows × 2 columns):
   | # | Title | Tags |
   |---|-------|------|
-  | 1 | FAnton | Identity, App design |
+  | 1 | Fanton | Identity, App design |
   | 2 | Kalinka Realty | Web design |
   | 3 | RGS Online | Identity, Web design |
-  | 4 | BCoin | Identity, App design |
+  | 4 | BCoin 2048 | Identity, App design |
   | 5 | Rusagroprom | Web design |
   | 6 | VSTZ | Identity, Web design |
   | 7 | Sogran | Web design |
@@ -120,7 +121,6 @@ Design uses two typeface families — both are commercial:
 
 ## 6. Responsive / Polish
 
-- [ ] 100% fullscreen, fluid width grid — layout stretches edge-to-edge at any viewport width, no max-width cap
 - [ ] Desktop baseline: 1440px wide, `30px` horizontal padding
 - [ ] Tablet breakpoint (~768px): stack 2-col grid to 1-col
 - [ ] Mobile breakpoint (~375px): reduce hero font size, adjust nav (hamburger menu?)
