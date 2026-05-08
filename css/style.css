@@ -131,10 +131,22 @@ a {
   text-transform: uppercase;
   color: var(--text-primary);
   letter-spacing: 0;
+  position: relative;
 }
 
-.nav__menu a:hover {
-  opacity: 0.5;
+.nav__menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--text-primary);
+  transition: width 0.3s ease;
+}
+
+.nav__menu a:hover::after {
+  width: 100%;
 }
 
 /* ─── Hero ───────────────────────────────────────────────────────────────── */
@@ -398,9 +410,10 @@ a {
 
 .footer__cta {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 48px;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .footer__heading {
@@ -418,7 +431,7 @@ a {
 .footer__links {
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 48px;
 }
 
 .footer__links a {
@@ -429,10 +442,22 @@ a {
   text-transform: uppercase;
   color: var(--text-primary);
   white-space: nowrap;
+  position: relative;
 }
 
-.footer__links a:hover {
-  opacity: 0.5;
+.footer__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--text-primary);
+  transition: width 0.3s ease;
+}
+
+.footer__links a:hover::after {
+  width: 100%;
 }
 
 .footer__link-sep {
