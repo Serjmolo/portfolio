@@ -36,13 +36,35 @@ document.addEventListener('mousemove', e => {
 document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; });
 document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; });
 
-// Smooth scroll for nav anchor links
-document.querySelectorAll('a[href^="#"]').forEach(link => {
+// Custom slow smooth scroll for nav anchor links
+function scrollToTarget(target, duration) {
+  const navHeight = document.getElementById('nav').offsetHeight;
+  const start = window.scrollY;
+  const end = target.getBoundingClientRect().top + start - navHeight;
+  const distance = end - start;
+  let startTime = null;
+
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
+
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    const elapsed = timestamp - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    window.scrollTo(0, start + distance * easeInOutCubic(progress));
+    if (progress < 1) requestAnimationFrame(step);
+  }
+
+  requestAnimationFrame(step);
+}
+
+document.querySelectorAll('.nav__menu a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
     const target = document.querySelector(link.getAttribute('href'));
     if (!target) return;
     e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth' });
+    scrollToTarget(target, 1400);
   });
 });
 
