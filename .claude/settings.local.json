@@ -9,7 +9,8 @@
       "Bash(node *)",
       "PowerShell(Get-Content *)",
       "PowerShell(node -e \"require\\('puppeteer'\\)\" 2>&1; echo \"exit: $LASTEXITCODE\")",
-      "Bash(powershell *)"
+      "Bash(powershell *)",
+      "PowerShell(Get-ChildItem D:\\\\Vibecode\\\\Web-portfolio | Where-Object { $_.Name -ne 'node_modules' } | Select-Object Name)"
     ]
   }
 }
