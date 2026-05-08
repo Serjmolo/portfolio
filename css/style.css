@@ -276,7 +276,7 @@ a {
 
 .about {
   background: var(--surface);
-  padding: 96px 120px;
+  padding: 96px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -292,16 +292,12 @@ a {
   line-height: 1.2;
   letter-spacing: -1.44px;
   color: var(--text-primary);
-  max-width: 900px;
+  width: 100%;
+  padding: 0 120px;
 }
 
 .about__bio em {
   font-style: italic;
-}
-
-.about__arrow {
-  height: 96px;
-  width: auto;
 }
 
 .about__photo {

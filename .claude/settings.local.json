@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -e \"require\\('playwright'\\)\")",
+      "Bash(npm install *)",
+      "Bash(Get-Content \"C:\\\\Users\\\\Sergey\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\D--Vibecode-Web-portfolio\\\\643c9eb6-d03b-4c79-b40b-21e3ee7d598d\\\\tasks\\\\b1j64mlup.output\" -Wait)",
+      "Bash(Select-String -Pattern \"added|error|warn|npm\" --SimpleMatch)"
+    ]
+  }
+}
