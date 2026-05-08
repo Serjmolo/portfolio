@@ -195,6 +195,10 @@ a {
   margin-bottom: 48px;
 }
 
+.about__label {
+  margin-bottom: 0;
+}
+
 .works__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -226,6 +230,10 @@ a {
 }
 
 .case--bcoin .case__cover {
+  background: var(--text-primary);
+}
+
+.case--vstz .case__cover {
   background: var(--accent);
 }
 
@@ -292,7 +300,7 @@ a {
 }
 
 .about__arrow {
-  height: 128px;
+  height: 96px;
   width: auto;
 }
 
@@ -355,14 +363,15 @@ a {
 
 .footer__link-sep {
   width: 62px;
-  height: auto;
+  height: 1px;
   display: block;
 }
 
 .footer__divider {
   width: 100%;
-  height: auto;
-  display: block;
+  border: none;
+  border-top: 1px solid var(--text-secondary);
+  margin: 0;
 }
 
 .footer__copyright {
