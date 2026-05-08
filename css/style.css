@@ -347,7 +347,7 @@ a {
   letter-spacing: -1.44px;
   color: var(--text-primary);
   width: 100%;
-  margin: 0;
+  margin: 0 440px;
   padding: 0;
 }
 
@@ -361,6 +361,11 @@ a {
   border-radius: 48px;
   object-fit: cover;
   flex-shrink: 0;
+}
+
+.about__arrow-down {
+  width: 40px;
+  height: auto;
 }
 
 /* ─── Footer ─────────────────────────────────────────────────────────────── */
@@ -416,7 +421,7 @@ a {
   width: 62px;
   height: 1px;
   display: block;
-  background: var(--text-primary);
+  background: #25DD00;
   flex-shrink: 0;
 }
 
