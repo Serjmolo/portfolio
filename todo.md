@@ -101,7 +101,7 @@ Design uses two typeface families — both are commercial:
 ### Footer / Contact (`#contact`)
 - [ ] "LET'S TALK" heading — 48px TT Ramillas Italic, uppercase
 - [ ] Social links row: LinkedIn · Telegram · Email (with line separators)
-- [ ] Add real URLs for each social link
+- [x] Add real URLs for each social link
 - [ ] Horizontal divider line
 - [ ] Copyright row: `© 2026 Dsgn warrior` — left, `Version 1.0` — right
 
