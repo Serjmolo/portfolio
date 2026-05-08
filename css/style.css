@@ -230,6 +230,25 @@ a {
   aspect-ratio: 675 / 400;
   position: relative;
   background: var(--surface);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.case__cover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  transition: background 0.4s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.works__grid:hover .case:hover .case__cover {
+  transform: scale(1.03);
+}
+
+.works__grid:hover .case:hover .case__cover::after {
+  background: rgba(0, 0, 0, 0.45);
 }
 
 .case__cover img {
