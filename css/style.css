@@ -274,6 +274,9 @@ a {
   display: flex;
   flex-direction: column;
   gap: 30px;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 
 .case__cover {
