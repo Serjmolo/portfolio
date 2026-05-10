@@ -53,9 +53,12 @@
   --surface:        #1d1d1d;
   --text-primary:   #ffffff;
   --text-secondary: #818181;
+  --accent:         #25DD00;
 }
 
-[data-theme="dark"] .nav__logo {
+[data-theme="dark"] .nav__logo,
+[data-theme="dark"] .hero__arrow,
+[data-theme="dark"] .about__arrow-down {
   filter: invert(1);
 }
 
