@@ -104,6 +104,8 @@
     const vy      = new Float32Array(N);
     const colorT  = new Float32Array(N); // 0=base color, 1=green (#25DD00)
     const zone    = new Uint8Array(N);   // 0=iris 1=pupil 2=sclera 3=eyelid
+    const colorBias = new Float32Array(N * 3); // per-particle additive offset from base
+    const dimStore  = new Float32Array(N).fill(1); // per-particle dim factor (pupil)
 
     // #25DD00 normalised
     const GR = 37  / 255;
@@ -115,11 +117,22 @@
     const CG = 243 / 255;
     const CB = 237 / 255;
 
+    // #292929 normalised — dark theme base
+    const DR = 41 / 255;
+    const DG = 41 / 255;
+    const DB = 41 / 255;
+
+    function baseColor() {
+      return document.documentElement.getAttribute('data-theme') === 'dark'
+        ? [DR, DG, DB] : [CR, CG, CB];
+    }
+
     function fill() {
       const d = dims();
+      const [br, bg, bb] = baseColor();
       let i = 0;
 
-      // Iris — warm off-white, slight center-bright gradient
+      // Iris — base color, slight center-bright gradient
       for (let k = 0; k < NI; k++, i++) {
         const [x, y] = randCircle(d.ir);
         const r      = Math.sqrt(x * x + y * y);
@@ -129,15 +142,21 @@
         hy[i]   = y;
         zone[i] = 0;
         const t  = r / d.ir;
-        origCol[i*3]   = clamp(CR - t*0.06 + rand(0.018));
-        origCol[i*3+1] = clamp(CG - t*0.06 + rand(0.018));
-        origCol[i*3+2] = clamp(CB - t*0.06 + rand(0.018));
+        const bR = -t*0.06 + rand(0.018);
+        const bG = -t*0.06 + rand(0.018);
+        const bB = -t*0.06 + rand(0.018);
+        colorBias[i*3]   = bR;
+        colorBias[i*3+1] = bG;
+        colorBias[i*3+2] = bB;
+        origCol[i*3]   = clamp(br + bR);
+        origCol[i*3+1] = clamp(bg + bG);
+        origCol[i*3+2] = clamp(bb + bB);
         pos[i*3]   = x + spread(FW * 0.9);
         pos[i*3+1] = y + spread(FH * 0.9);
         pos[i*3+2] = 0.1;
       }
 
-      // Pupil — slightly dimmer warm off-white
+      // Pupil — slightly dimmer
       for (let k = 0; k < NP; k++, i++) {
         const [x, y] = randCircle(d.pr);
         polR[i] = Math.sqrt(x * x + y * y);
@@ -145,39 +164,48 @@
         hx[i]   = x;
         hy[i]   = y;
         zone[i] = 1;
-        const dim = 0.88 + Math.random() * 0.04;
-        origCol[i*3]   = CR * dim;
-        origCol[i*3+1] = CG * dim;
-        origCol[i*3+2] = CB * dim;
+        const dim   = 0.88 + Math.random() * 0.04;
+        dimStore[i] = dim;
+        colorBias[i*3] = colorBias[i*3+1] = colorBias[i*3+2] = 0;
+        origCol[i*3]   = br * dim;
+        origCol[i*3+1] = bg * dim;
+        origCol[i*3+2] = bb * dim;
         pos[i*3]   = x + spread(FW * 0.5);
         pos[i*3+1] = y + spread(FH * 0.5);
         pos[i*3+2] = 0.2;
       }
 
-      // Sclera — warm off-white
+      // Sclera — base color
       for (let k = 0; k < NS; k++, i++) {
         const [x, y] = randSclera(d.ew, d.eh, d.ir * 1.03);
         hx[i]   = x;
         hy[i]   = y;
         zone[i] = 2;
-        origCol[i*3]   = clamp(CR + rand(0.015));
-        origCol[i*3+1] = clamp(CG + rand(0.015));
-        origCol[i*3+2] = clamp(CB + rand(0.015));
+        const bR = rand(0.015);
+        const bG = rand(0.015);
+        const bB = rand(0.015);
+        colorBias[i*3]   = bR;
+        colorBias[i*3+1] = bG;
+        colorBias[i*3+2] = bB;
+        origCol[i*3]   = clamp(br + bR);
+        origCol[i*3+1] = clamp(bg + bG);
+        origCol[i*3+2] = clamp(bb + bB);
         pos[i*3]   = x + spread(FW * 0.3);
         pos[i*3+1] = y + spread(FH * 0.3);
         pos[i*3+2] = 0;
       }
 
-      // Eyelid — warm off-white
+      // Eyelid — base color
       for (let k = 0; k < NE; k++, i++) {
         const upper  = k < NE / 2;
         const [x, y] = elidPt(Math.random(), d.ew, d.eh, upper);
         hx[i]   = x;
         hy[i]   = y;
         zone[i] = 3;
-        origCol[i*3]   = CR;
-        origCol[i*3+1] = CG;
-        origCol[i*3+2] = CB;
+        colorBias[i*3] = colorBias[i*3+1] = colorBias[i*3+2] = 0;
+        origCol[i*3]   = br;
+        origCol[i*3+1] = bg;
+        origCol[i*3+2] = bb;
         pos[i*3]   = x;
         pos[i*3+1] = y + (upper ? 1 : -1) * FH * (0.1 + Math.random() * 0.25);
         pos[i*3+2] = 0.5;
@@ -186,6 +214,26 @@
       // Initialise current color = original
       col.set(origCol);
       colorT.fill(0);
+    }
+
+    function recolor() {
+      const [br, bg, bb] = baseColor();
+      for (let i = 0; i < N; i++) {
+        if (zone[i] === 1) {
+          const dim = dimStore[i];
+          origCol[i*3]   = br * dim;
+          origCol[i*3+1] = bg * dim;
+          origCol[i*3+2] = bb * dim;
+        } else {
+          origCol[i*3]   = clamp(br + colorBias[i*3]);
+          origCol[i*3+1] = clamp(bg + colorBias[i*3+1]);
+          origCol[i*3+2] = clamp(bb + colorBias[i*3+2]);
+        }
+        const t = colorT[i];
+        col[i*3]   = origCol[i*3]   * (1-t) + GR * t;
+        col[i*3+1] = origCol[i*3+1] * (1-t) + GG * t;
+        col[i*3+2] = origCol[i*3+2] * (1-t) + GB * t;
+      }
     }
 
     fill();
@@ -211,6 +259,11 @@
     });
 
     scene.add(new THREE.Points(geo, mat));
+
+    new MutationObserver(() => {
+      recolor();
+      geo.attributes.color.needsUpdate = true;
+    }).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 
     // ── State ────────────────────────────────────────────────────────────
     const mouse = { x: 0, y: 0 };
