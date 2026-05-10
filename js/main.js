@@ -95,7 +95,7 @@ const TRANSLATIONS = {
     'case-fantons':     'FAnton',
     'case-kalinka':     'Kalinka Realty',
     'case-rgs':         'RGS Online',
-    'case-bcoin':       'BCoin',
+    'case-bcoin':       'BCoin 2048',
     'case-rusagroprom': 'Rusagroprom',
     'case-vstz':        'VSTZ',
     'case-sogran':      'Sogran',
@@ -155,6 +155,9 @@ function applyLang(lang) {
   document.querySelectorAll('[data-i18n-html]').forEach(el => {
     const key = el.getAttribute('data-i18n-html');
     if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+  document.querySelectorAll('[data-href-ru]').forEach(el => {
+    el.href = lang === 'ru' ? el.dataset.hrefRu : el.dataset.hrefEn;
   });
   const isDark = html.getAttribute('data-theme') === 'dark';
   themeToggle.textContent = isDark ? t['theme-light'] : t['theme-dark'];
