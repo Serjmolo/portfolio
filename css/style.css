@@ -56,9 +56,7 @@
   --accent:         #25DD00;
 }
 
-[data-theme="dark"] .nav__logo,
-[data-theme="dark"] .hero__arrow,
-[data-theme="dark"] .about__arrow-down {
+[data-theme="dark"] .nav__logo {
   filter: invert(1);
 }
 
