@@ -192,5 +192,5 @@ langToggle.addEventListener('click', () => {
   applyLang((localStorage.getItem('lang') || 'en') === 'en' ? 'ru' : 'en');
 });
 
-applyTheme(localStorage.getItem('theme') || 'light');
-applyLang(localStorage.getItem('lang') || 'en');
+applyTheme(localStorage.getItem('theme') || 'dark');
+applyLang(localStorage.getItem('lang') || 'ru');
