@@ -108,8 +108,10 @@ const TRANSLATIONS = {
     'footer-link-email': 'Email',
     'footer-copy':      '© 2026 Dsgn Warrior',
     'footer-version':   'Version 1.0',
-    'theme-dark':       'Dark mode',
-    'theme-light':      'Light mode',
+    'theme-dark-lg':    'Dark mode',
+    'theme-light-lg':   'Light mode',
+    'theme-dark-sm':    'Dark',
+    'theme-light-sm':   'Light',
   },
   ru: {
     'nav-works':        'Работы',
@@ -140,8 +142,10 @@ const TRANSLATIONS = {
     'footer-link-email': 'Почта',
     'footer-copy':      '© 2026 Dsgn Warrior',
     'footer-version':   'Версия 1.0',
-    'theme-dark':       'Тёмная тема',
-    'theme-light':      'Светлая тема',
+    'theme-dark-lg':    'Тёмная тема',
+    'theme-light-lg':   'Светлая тема',
+    'theme-dark-sm':    'Темная',
+    'theme-light-sm':   'Светлая',
   }
 };
 
@@ -166,7 +170,8 @@ function applyLang(lang) {
     el.href = lang === 'ru' ? el.dataset.hrefRu : el.dataset.hrefEn;
   });
   const isDark = html.getAttribute('data-theme') === 'dark';
-  themeToggle.textContent = isDark ? t['theme-light'] : t['theme-dark'];
+  themeToggle.querySelector('.lbl-lg').textContent = isDark ? t['theme-light-lg'] : t['theme-dark-lg'];
+  themeToggle.querySelector('.lbl-sm').textContent = isDark ? t['theme-light-sm'] : t['theme-dark-sm'];
 }
 
 function applyTheme(theme) {
@@ -174,9 +179,9 @@ function applyTheme(theme) {
   localStorage.setItem('theme', theme);
   const lang = localStorage.getItem('lang') || 'en';
   const isDark = theme === 'dark';
-  themeToggle.textContent = isDark
-    ? TRANSLATIONS[lang]['theme-light']
-    : TRANSLATIONS[lang]['theme-dark'];
+  const t = TRANSLATIONS[lang];
+  themeToggle.querySelector('.lbl-lg').textContent = isDark ? t['theme-light-lg'] : t['theme-dark-lg'];
+  themeToggle.querySelector('.lbl-sm').textContent = isDark ? t['theme-light-sm'] : t['theme-dark-sm'];
 }
 
 themeToggle.addEventListener('click', () => {
