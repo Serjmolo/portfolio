@@ -680,6 +680,13 @@ a {
   }
 }
 
+@media (min-width: 375px) and (max-width: 400px) {
+  .nav__logo {
+    width: 200px;
+    height: auto;
+  }
+}
+
 @media (pointer: coarse) {
   html, body {
     cursor: auto;
