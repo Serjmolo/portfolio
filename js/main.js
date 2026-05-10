@@ -1,4 +1,4 @@
-﻿// Hero title + tagline — line-by-line reveal (bottom to top)
+// Hero title + tagline — line-by-line reveal (bottom to top)
 (function () {
   const STAGGER  = 400;
   const DURATION = 1500;
@@ -93,7 +93,7 @@ const TRANSLATIONS = {
     'badge-app-design': 'App design',
     'badge-web-design': 'Web design',
     'about-label':      'About',
-    'about-bio':        'Sergey Golosov, art director and designer with <em>10 years of experience</em> in product, web and brand design. I create product design for <em>fintech, insurance, and complex B2B/B2E interfaces</em>. I believe good design disappears — and what stays is a person who got what they needed without friction',
+    'about-bio':        'Hi, I’m Sergey Golosov, an art director and designer with <em>10 years of design experience</em> in product, web, and branding. I turn <em>fintech, insurance, and B2B/B2E products</em> into clear, honest interfaces. I believe good design disappears — and what stays is a person who got what they needed without friction',
     'footer-cta':       'Let’s talk',
     'footer-copy':      '© 2026 Dsgn Warrior',
     'footer-version':   'Version 1.0',
@@ -111,10 +111,10 @@ const TRANSLATIONS = {
     'hero-tag-3':       'Создавай',
     'works-label':      'Работы, созданные с любовью, от настоящего к прошлому',
     'badge-identity':   'Айдентика',
-    'badge-app-design': 'Дизайн приложения',
+    'badge-app-design': 'App дизайн',
     'badge-web-design': 'Веб-дизайн',
     'about-label':      'Обо мне',
-    'about-bio':        'Сергей Голосов, арт-директор и дизайнер с <em>10-летним опытом</em> в продуктовом, веб и бренд дизайне. Я создаю дизайн продуктов для <em>финтеха, страхования, сложных B2B/B2E интерфейсов</em>. Я верю, что хороший дизайн исчезает — и остаётся лишь человек, который получил нужное без лишних усилий',
+    'about-bio':        'Сергей Голосов — арт-директор и дизайнер с <em>10-летним опытом</em> в продуктовом, веб и бренд дизайне. Я создаю <em>дизайн продуктов для финтеха, страхования, сложных B2B/B2E интерфейсов</em>. Я верю, что хороший дизайн исчезает — и остаётся лишь человек, который получил нужное без лишних усилий',
     'footer-cta':       'Связаться',
     'footer-copy':      '© 2026 Dsgn Warrior',
     'footer-version':   'Версия 1.0',
