@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,10 +15,14 @@
   <nav class="nav" id="nav">
     <img class="nav__logo" src="assets/images/logo.svg" alt="DSGN WARRIOR">
     <ul class="nav__menu">
-      <li><a href="#works">Works</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
+      <li><a href="#works" data-i18n="nav-works">Works</a></li>
+      <li><a href="#about" data-i18n="nav-about">About</a></li>
+      <li><a href="#contact" data-i18n="nav-contact">Contact</a></li>
     </ul>
+    <div class="nav__settings">
+      <button class="nav__theme-toggle" id="themeToggle">Dark mode</button>
+      <button class="nav__lang-toggle" id="langToggle">ENG</button>
+    </div>
   </nav>
 
   <main>
@@ -27,21 +31,21 @@
     <section class="hero" id="hero">
       <canvas class="hero__canvas" id="eye-canvas"></canvas>
       <h1 class="hero__title">
-        <span class="regular">The past designs</span>
-        <span class="italic">the future</span>
+        <span class="regular" data-i18n="hero-title-1">The past designs</span>
+        <span class="italic" data-i18n="hero-title-2">the future</span>
       </h1>
       <div class="hero__tagline">
-        <span>Think</span>
+        <span data-i18n="hero-tag-1">Think</span>
         <img class="hero__arrow" src="assets/images/arrow.svg" alt="">
-        <span>Analyze</span>
+        <span data-i18n="hero-tag-2">Analyze</span>
         <img class="hero__arrow" src="assets/images/arrow.svg" alt="">
-        <span>Design</span>
+        <span data-i18n="hero-tag-3">Design</span>
       </div>
     </section>
 
     <!-- Works -->
     <section class="works" id="works">
-      <p class="works__label">Works I made with love from present to past</p>
+      <p class="works__label" data-i18n="works-label">Works I made with love from present to past</p>
       <div class="works__grid">
 
         <!-- 1. FAnton -->
@@ -52,8 +56,8 @@
           <div class="case__title-row">
             <span class="case__name">FAnton</span>
             <div class="case__badges">
-              <span class="badge">Identity</span>
-              <span class="badge">App design</span>
+              <span class="badge" data-i18n="badge-identity">Identity</span>
+              <span class="badge" data-i18n="badge-app-design">App design</span>
             </div>
           </div>
         </a>
@@ -66,7 +70,7 @@
           <div class="case__title-row">
             <span class="case__name">Kalinka Realty</span>
             <div class="case__badges">
-              <span class="badge">Web design</span>
+              <span class="badge" data-i18n="badge-web-design">Web design</span>
             </div>
           </div>
         </a>
@@ -79,8 +83,8 @@
           <div class="case__title-row">
             <span class="case__name">RGS Online</span>
             <div class="case__badges">
-              <span class="badge">Identity</span>
-              <span class="badge">Web design</span>
+              <span class="badge" data-i18n="badge-identity">Identity</span>
+              <span class="badge" data-i18n="badge-web-design">Web design</span>
             </div>
           </div>
         </a>
@@ -93,8 +97,8 @@
           <div class="case__title-row">
             <span class="case__name">BCoin</span>
             <div class="case__badges">
-              <span class="badge">Identity</span>
-              <span class="badge">App design</span>
+              <span class="badge" data-i18n="badge-identity">Identity</span>
+              <span class="badge" data-i18n="badge-app-design">App design</span>
             </div>
           </div>
         </a>
@@ -107,7 +111,7 @@
           <div class="case__title-row">
             <span class="case__name">Rusagroprom</span>
             <div class="case__badges">
-              <span class="badge">Web design</span>
+              <span class="badge" data-i18n="badge-web-design">Web design</span>
             </div>
           </div>
         </a>
@@ -120,11 +124,11 @@
           <div class="case__title-row">
             <span class="case__name">VSTZ</span>
             <div class="case__badges">
-              <span class="badge">Identity</span>
-              <span class="badge">Web design</span>
+              <span class="badge" data-i18n="badge-identity">Identity</span>
+              <span class="badge" data-i18n="badge-web-design">Web design</span>
             </div>
           </div>
-        </article>
+        </a>
 
         <!-- 7. Sogran -->
         <a class="case case--sogran" href="https://mainbit.ru/portfolio/sajty/sogran" target="_blank" rel="noopener">
@@ -134,7 +138,7 @@
           <div class="case__title-row">
             <span class="case__name">Sogran</span>
             <div class="case__badges">
-              <span class="badge">Web design</span>
+              <span class="badge" data-i18n="badge-web-design">Web design</span>
             </div>
           </div>
         </a>
@@ -147,7 +151,7 @@
           <div class="case__title-row">
             <span class="case__name">Private Bank Otkritie</span>
             <div class="case__badges">
-              <span class="badge">Web design</span>
+              <span class="badge" data-i18n="badge-web-design">Web design</span>
             </div>
           </div>
         </a>
@@ -157,13 +161,13 @@
 
     <!-- About -->
     <section class="about" id="about">
-      <p class="about__label">About</p>
-      <p class="about__bio">
+      <p class="about__label" data-i18n="about-label">About</p>
+      <p class="about__bio" data-i18n-html="about-bio">
         Hi, I'm Sergey Golosov, an art director and designer with
         <em>10 years of design experience</em>
         in product, web, and branding. I turn
         <em>fintech, insurance, and B2B/B2E products</em>
-        into clear, honest interfaces. I believe good design disappears - and what stays is a person who got what they needed without friction
+        into clear, honest interfaces. I believe good design disappears — and what stays is a person who got what they needed without friction
       </p>
       <img class="about__arrow-down" src="assets/images/arrow-down.svg" alt="">
       <img class="about__photo" src="assets/images/photo.jpg" alt="Sergey Golosov">
@@ -174,7 +178,7 @@
   <!-- Footer / Contact -->
   <footer class="footer" id="contact">
     <div class="footer__cta">
-      <p class="footer__heading">Let's talk</p>
+      <p class="footer__heading" data-i18n="footer-cta">Let's talk</p>
       <div class="footer__links">
         <a href="https://www.linkedin.com/in/sergey-golosov-92b1243b0" target="_blank" rel="noopener">LinkedIn</a>
         <a href="https://t.me/serjmolo" target="_blank" rel="noopener">Telegram</a>
@@ -183,8 +187,8 @@
     </div>
     <hr class="footer__divider">
     <div class="footer__copyright">
-      <span>© 2026 Dsgn Warrior</span>
-      <span>Version 1.0</span>
+      <span data-i18n="footer-copy">© 2026 Dsgn Warrior</span>
+      <span data-i18n="footer-version">Version 1.0</span>
     </div>
   </footer>
 

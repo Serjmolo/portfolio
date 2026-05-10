@@ -1,6 +1,6 @@
 ---
-name: Portfolio site — Three.js setup and eye animation
-description: Three.js vendored locally (v0.160.0 UMD). eye.js has known dimension and ordering bugs fixed 2026-05-08.
+name: Portfolio site — Three.js setup, eye animation, dark theme and i18n
+description: Three.js vendored locally (v0.160.0 UMD). Dark theme via data-theme attr on <html>. i18n via TRANSLATIONS map in main.js with data-i18n / data-i18n-html attributes.
 type: project
 ---
 
@@ -29,3 +29,25 @@ Fix applied: downloaded `three@0.160.0/build/three.min.js` locally to `js/three.
 `renderer.setSize(W, H)` was called before `renderer.setPixelRatio(dpr)`. THREE.js uses the stored pixelRatio inside setSize to compute the canvas buffer dimensions. With the wrong order the canvas was sized at 1× then resized again at dpr×. Fixed by calling `setPixelRatio(dpr)` first, then `setSize(W, H)`.
 
 **How to apply:** Any future WebGL/GPU-dependent initialization in this project should: (1) guard dimensions, (2) pre-size canvas, (3) wrap constructor in logged try/catch, (4) call setPixelRatio before setSize.
+
+---
+
+## Dark theme and i18n — added 2026-05-10
+
+### Dark theme
+- Toggled via `[data-theme="dark"]` on `<html>`. All colors use CSS custom properties in `:root` overridden by the dark selector.
+- SVG assets (logo, arrows) inverted with `filter: invert(1)` under dark theme.
+- Theme persisted to `localStorage('theme')`.
+- Button label: "Dark mode" / "Light mode" (sentence case in JS, `text-transform: uppercase` in CSS).
+
+### i18n
+- Two languages: `en` and `ru`. `TRANSLATIONS` object in `main.js`.
+- Plain text elements use `data-i18n="key"` — updated via `el.textContent`.
+- HTML-containing elements (about bio with `<em>`) use `data-i18n-html="key"` — updated via `el.innerHTML`.
+- Lang persisted to `localStorage('lang')`.
+- `<html lang="">` attribute is updated by `applyLang()` (fix applied 2026-05-10).
+- Lang button shows current lang ("ENG" when English, "RU" when Russian) — not the target lang. This is intentional per current design.
+
+### Navbar centering (fix applied 2026-05-10)
+- The nav menu was not truly centered because `justify-content: space-between` was used with unequal-width logo and settings siblings.
+- Fixed by adding `position: absolute; left: 50%; transform: translateX(-50%)` to `.nav__menu`. `.nav` already has `position: sticky` so it acts as the containing block. Menu is hidden at 480px breakpoint, so no overlap risk on mobile.

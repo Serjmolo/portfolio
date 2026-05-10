@@ -46,6 +46,29 @@
   --ramillas:       'TT Ramillas Trial', serif;
 }
 
+/* ─── Dark theme ─────────────────────────────────────────────────────────── */
+
+[data-theme="dark"] {
+  --bg:             #111111;
+  --surface:        #1d1d1d;
+  --text-primary:   #ffffff;
+  --text-secondary: #818181;
+}
+
+[data-theme="dark"] .nav__logo,
+[data-theme="dark"] .hero__arrow,
+[data-theme="dark"] .about__arrow-down {
+  filter: invert(1);
+}
+
+[data-theme="dark"] .nav.scrolled {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body, .nav, .about, .badge {
+  transition: background-color 0.3s ease;
+}
+
 /* ─── Reset ──────────────────────────────────────────────────────────────── */
 
 *, *::before, *::after {
@@ -121,6 +144,9 @@ a {
   list-style: none;
   margin: 0;
   padding: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .nav__menu a {
@@ -146,6 +172,45 @@ a {
 }
 
 .nav__menu a:hover::after {
+  width: 100%;
+}
+
+.nav__settings {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  flex-shrink: 0;
+}
+
+.nav__theme-toggle,
+.nav__lang-toggle {
+  font-family: var(--neoris);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  padding: 0;
+  position: relative;
+  white-space: nowrap;
+}
+
+.nav__theme-toggle::after,
+.nav__lang-toggle::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--text-primary);
+  transition: width 0.3s ease;
+}
+
+.nav__theme-toggle:hover::after,
+.nav__lang-toggle:hover::after {
   width: 100%;
 }
 
@@ -499,6 +564,10 @@ a {
     gap: 40px;
   }
 
+  .nav__settings {
+    gap: 32px;
+  }
+
   .works__grid {
     grid-template-columns: 1fr;
   }
@@ -517,11 +586,20 @@ a {
   /* NavBar */
   .nav {
     padding: 30px 16px;
-    justify-content: center;
+    justify-content: space-between;
   }
 
   .nav__menu {
     display: none;
+  }
+
+  .nav__settings {
+    gap: 20px;
+  }
+
+  .nav__theme-toggle,
+  .nav__lang-toggle {
+    font-size: 13px;
   }
 
   /* Hero */

@@ -1,1 +1,1 @@
-- [Portfolio site — Three.js setup and eye animation](project_portfolio.md) — Three.js vendored locally (v0.160.0 UMD); WebGLRenderer must be try/catched in eye.js
+- [Portfolio site — Three.js, dark theme, i18n](project_portfolio.md) — Three.js vendored (v0.160.0 UMD); dark theme via data-theme on html; i18n via TRANSLATIONS map; nav menu absolutely centered
